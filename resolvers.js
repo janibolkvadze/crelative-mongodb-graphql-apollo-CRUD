@@ -1,48 +1,60 @@
-const Post = require("./models/Post.model");
+const Quote = require("./models/Quote.model");
 
 const resolvers = {
   Query: {
-    hello: () => {
-      return "Hello world!";
+    getAllQuotes: async () => {
+      return await Quote.find();
     },
-    getAllPosts: async () => {
-      return await Post.find();
-    },
-    getPost: async (parent, args, context, info) => {
+    getQuote: async (parent, args, context, info) => {
       const { id } = args;
 
-      return Post.findById(id);
+      return Quote.findById(id);
     },
   },
   Mutation: {
-    createPost: async (parent, args, context, info) => {
-      const { title, description } = args.post;
-      const post = new Post({ title, description });
+    createQuote: async (parent, args, context, info) => {
+      const { name, email, phone, project, services, nda, agreeToPrivacyPolicy } = args.quote;
+      const quote = new Quote({ name, email, phone, project, services, nda, agreeToPrivacyPolicy });
 
-      await post.save();
+      await quote.save();
 
-      return post;
+      return quote;
     },
-    deletePost: async (parent, args, context, info) => {
+    deleteQuote: async (parent, args, context, info) => {
       const { id } = args;
 
-      await Post.findByIdAndDelete(id);
-      return `Post ${id} deleted`;
+      await Quote.findByIdAndDelete(id);
+      return `Quote ${id} deleted`;
     },
-    updatePost: async (parent, args, context, info) => {
+    updateQuote: async (parent, args, context, info) => {
       const { id } = args;
-      const { title, description } = args.post;
+      const { name, email, phone, project, services, nda, agreeToPrivacyPolicy } = args.quote;
       const updates = {};
 
-      if (title !== undefined) {
-        updates.title = title;
+      if (name !== undefined) {
+        updates.name = name;
       }
-      if (description !== undefined) {
-        updates.description = description;
+      if (email !== undefined) {
+        updates.email = email;
       }
-      const post = await Post.findByIdAndUpdate(id, updates, { new: true }); // { new: true } <-- return the new object
+      if (phone !== undefined) {
+        updates.phone = phone;
+      }
+      if (project !== undefined) {
+        updates.project = project;
+      }
+      if (services !== undefined) {
+        updates.services = services;
+      }
+      if (nda !== undefined) {
+        updates.nda = nda;
+      }
+      if (agreeToPrivacyPolicy !== undefined) {
+        updates.agreeToPrivacyPolicy = agreeToPrivacyPolicy;
+      }
+      const quote = await Quote.findByIdAndUpdate(id, updates, { new: true }); // { new: true } <-- return the new object
 
-      return post;
+      return quote;
     }
   },
 };

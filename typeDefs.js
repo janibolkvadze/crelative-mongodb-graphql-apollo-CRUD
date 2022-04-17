@@ -1,26 +1,35 @@
 const {gql} = require("apollo-server-express");
 const typeDefs = gql`
-  type Post {
+  type Quote {
     id: ID
-    title: String
-    description: String
+    name: String
+    email: String
+    phone: String
+    project: String
+    services: [String]
+    nda: Boolean
+    agreeToPrivacyPolicy: Boolean
   }
+
   type Query {
-    hello: String
-
-    getAllPosts: [Post]
-
-    getPost(id: ID): Post
+    getAllQuotes: [Quote]
+    getQuote(id: ID): Quote
   }
 
-  input PostInput {
-    title: String
-    description: String
+  input QuoteInput {
+    name: String
+    email: String
+    phone: String
+    project: String
+    services: [String]
+    nda: Boolean
+    agreeToPrivacyPolicy: Boolean
   }
+
   type Mutation {
-    createPost(post: PostInput): Post
-    deletePost(id: ID): String
-    updatePost(id: ID, post: PostInput): Post
+    createQuote(quote: QuoteInput): Quote
+    deleteQuote(id: ID): String
+    updateQuote(id: ID, quote: QuoteInput): Quote
   }
 `;
 

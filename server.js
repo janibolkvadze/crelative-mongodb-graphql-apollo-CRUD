@@ -13,7 +13,7 @@ const startServer = async () => {
     development: { ssl: false, port: 8000, hostname: 'localhost' },
   };
 
-  const environment = process.env.NODE_ENV || 'production';
+  const environment = process.env.NODE_ENV || 'development';
   const config = configurations[environment];
   const app = express();
   const server = new ApolloServer({
@@ -24,12 +24,11 @@ const startServer = async () => {
   await server.start();
   server.applyMiddleware({ app: app }); // Add  path: '/' to customize the path
 
-
   app.use((req, res) => {
     res.send("Hello from espress server");
   });
 
-  await mongoose.connect('mongodb://localhost:27017/post_db', {
+  await mongoose.connect('mongodb://localhost:27017/quotes_db', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   });
