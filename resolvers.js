@@ -1,4 +1,5 @@
 const Quote = require("./models/Quote.model");
+const AcademySignUpForm = require("./models/AcademySignUpForm.model");
 
 const resolvers = {
   Query: {
@@ -10,6 +11,9 @@ const resolvers = {
 
       return Quote.findById(id);
     },
+    getAllAcademySignUpForms: async () => {
+      return await AcademySignUpForm.find();
+    },
   },
   Mutation: {
     createQuote: async (parent, args, context, info) => {
@@ -19,6 +23,14 @@ const resolvers = {
       await quote.save();
 
       return quote;
+    },
+    createAcademySignUpForm: async (parent, args, context, info) => {
+      const { name, email, phone, stack } = args.form;
+      const form = new AcademySignUpForm({ name, email, phone, stack });
+
+      await form.save();
+
+      return form;
     },
     deleteQuote: async (parent, args, context, info) => {
       const { id } = args;

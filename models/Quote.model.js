@@ -17,6 +17,10 @@ const QuoteSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    services: {
+        type: [String],
+        required: false,
+    },
     nda: {
         type: Boolean,
         required: false,
