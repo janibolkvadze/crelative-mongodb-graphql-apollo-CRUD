@@ -17,8 +17,8 @@ const resolvers = {
   },
   Mutation: {
     createQuote: async (parent, args, context, info) => {
-      const { name, email, phone, project, services, nda, agreeToPrivacyPolicy } = args.quote;
-      const quote = new Quote({ name, email, phone, project, services, nda, agreeToPrivacyPolicy });
+      const { name, email, phone, project, services, nda } = args.quote;
+      const quote = new Quote({ name, email, phone, project, services, nda });
 
       await quote.save();
 
@@ -40,7 +40,7 @@ const resolvers = {
     },
     updateQuote: async (parent, args, context, info) => {
       const { id } = args;
-      const { name, email, phone, project, services, nda, agreeToPrivacyPolicy } = args.quote;
+      const { name, email, phone, project, services, nda } = args.quote;
       const updates = {};
 
       if (name !== undefined) {
@@ -60,9 +60,6 @@ const resolvers = {
       }
       if (nda !== undefined) {
         updates.nda = nda;
-      }
-      if (agreeToPrivacyPolicy !== undefined) {
-        updates.agreeToPrivacyPolicy = agreeToPrivacyPolicy;
       }
       const quote = await Quote.findByIdAndUpdate(id, updates, { new: true }); // { new: true } <-- return the new object
 

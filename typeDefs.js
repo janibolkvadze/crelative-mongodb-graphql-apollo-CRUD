@@ -8,7 +8,6 @@ const typeDefs = gql`
     project: String
     services: [String]
     nda: Boolean
-    agreeToPrivacyPolicy: Boolean
   }
 
   type AcademySignUpForm {
@@ -32,7 +31,6 @@ const typeDefs = gql`
     project: String
     services: [String]
     nda: Boolean
-    agreeToPrivacyPolicy: Boolean
   }
 
   input AcademySignUpFormInput {

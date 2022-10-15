@@ -25,10 +25,6 @@ const QuoteSchema = new mongoose.Schema({
         type: Boolean,
         required: false,
     },
-    agreeToPrivacyPolicy: {
-        type: Boolean,
-        required: true,
-    },
 });
 
 const Quote = mongoose.model('quote', QuoteSchema);
