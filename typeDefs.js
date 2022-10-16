@@ -8,6 +8,12 @@ const typeDefs = gql`
     project: String
     services: [String]
     nda: Boolean
+    head: String
+    sub_head: String
+    utm_source: String
+    utm_campaign: String
+    utm_medium: String
+    utm_content: String
   }
 
   type AcademySignUpForm {
@@ -31,6 +37,12 @@ const typeDefs = gql`
     project: String
     services: [String]
     nda: Boolean
+    head: String
+    sub_head: String
+    utm_source: String
+    utm_campaign: String
+    utm_medium: String
+    utm_content: String
   }
 
   input AcademySignUpFormInput {

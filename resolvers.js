@@ -17,8 +17,8 @@ const resolvers = {
   },
   Mutation: {
     createQuote: async (parent, args, context, info) => {
-      const { name, email, phone, project, services, nda } = args.quote;
-      const quote = new Quote({ name, email, phone, project, services, nda });
+      const { name, email, phone, project, services, nda, head, sub_head, utm_source, utm_campaign, utm_medium, utm_content } = args.quote;
+      const quote = new Quote({ name, email, phone, project, services, nda, head, sub_head, utm_source, utm_campaign, utm_medium, utm_content });
 
       await quote.save();
 
@@ -40,7 +40,8 @@ const resolvers = {
     },
     updateQuote: async (parent, args, context, info) => {
       const { id } = args;
-      const { name, email, phone, project, services, nda } = args.quote;
+
+      const { name, email, phone, project, services, nda, head, sub_head, utm_source, utm_campaign, utm_medium, utm_content } = args.quote;
       const updates = {};
 
       if (name !== undefined) {
@@ -60,6 +61,24 @@ const resolvers = {
       }
       if (nda !== undefined) {
         updates.nda = nda;
+      }
+      if (head !== undefined) {
+        updates.head = head;
+      }
+      if (sub_head !== undefined) {
+        updates.sub_head = sub_head;
+      }
+      if (utm_source !== undefined) {
+        updates.utm_source = utm_source;
+      }
+      if (utm_campaign !== undefined) {
+        updates.utm_campaign = utm_campaign;
+      }
+      if (utm_medium !== undefined) {
+        updates.utm_medium = utm_medium;
+      }
+      if (utm_content !== undefined) {
+        updates.utm_content = utm_content;
       }
       const quote = await Quote.findByIdAndUpdate(id, updates, { new: true }); // { new: true } <-- return the new object
 
